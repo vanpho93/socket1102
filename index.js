@@ -21,7 +21,7 @@ io.on('connection', socket => {
     socket.on('NEW_USER_SIGN_UP', username => {
         if (arrUsername.indexOf(username) === -1) {
             arrUsername.push(username);
-            socket.emit('XAC_NHAN_DANG_KY', true);
+            socket.emit('XAC_NHAN_DANG_KY', arrUsername);
             io.emit('NEW_USER_CONNECTED', username);
         } else {
             socket.emit('XAC_NHAN_DANG_KY', false);
