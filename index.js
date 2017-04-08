@@ -13,4 +13,7 @@ app.get('/', (req, res) => res.render('home'));
 
 io.on('connection', socket => {
     console.log('New connection!');
+    socket.emit('SERVER_SEND_A_MESSAGE', 'XIN CHAO BAO');
 });
+
+//emit, on. on

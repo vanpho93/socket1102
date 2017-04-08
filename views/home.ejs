@@ -5,6 +5,9 @@
         <script src="/socket.io/socket.io.js"></script>
         <script>
             const socket = io.connect();
+            socket.on('SERVER_SEND_A_MESSAGE', data => {
+                console.log(data);
+            });
         </script>
     </head>
     <body>
