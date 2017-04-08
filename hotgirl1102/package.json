@@ -1,17 +1,16 @@
 {
-  "name": "socket1102",
+  "name": "hotgirl1102",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/vanpho93/socket1102.git",
-  "author": "Van Pho Nguyen <vanpho02@gmail.com>",
-  "license": "MIT",
-  "scripts":{
+  "scripts": {
     "start": "node index.js"
   },
+  "repository": "https://github.com/vanpho93/hotgirl1102.git",
+  "license": "MIT",
   "dependencies": {
     "ejs": "^2.5.6",
     "express": "^4.15.2",
-    "socket.io": "^1.7.3"
+    "pg": "^6.1.5"
   },
   "devDependencies": {
     "eslint-config-rallycoding": "^3.2.0"

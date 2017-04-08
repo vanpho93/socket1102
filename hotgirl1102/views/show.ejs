@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="../">
+        <title>Hot Girl</title>
+        <style>
+            a:visited {
+                color: #0000E9;
+            }
+            hr {
+                visibility: hidden
+            }
+            .div-nav {
+                display: flex;
+                width: 300px;
+                justify-content: space-between;
+                align-items: center;
+            }
+            #wrapper {
+                margin: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div class="div-nav">
+                <a href="/show/<%= id - 1 %>">Previous</a>
+                <h3><%= name %></h3>
+                <a href="/show/<%= id + 1 %>">Next</a>
+            </div>
+            <hr />
+            <img src="images/<%= image %>">
+            <hr />
+            <div class="div-nav">
+                <a href="/like/<%= id %>">Like <%= likes %></a>
+                <a href="#">Dislike <%= dislikes %></a>
+            </div>
+        </div>
+    </body>
+</html>

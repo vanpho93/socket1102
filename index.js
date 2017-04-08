@@ -7,16 +7,16 @@ const io = require('socket.io')(server);
 app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express.static('public'));
-server.listen(3000, () => console.log('server started'));
+server.listen(process.env.PORT || 3000, () => console.log('server started'));
 
 app.get('/', (req, res) => res.render('home'));
 
+app.get('/chat', (req, res) => {
+    res.render('chat');
+});
+
 io.on('connection', socket => {
     console.log('New connection!');
-    // setInterval(() => socket.emit('SERVER_SEND_A_MESSAGE', 'XIN CHAO BAO'), 2000);
-    socket.on('CLIENT_SEND_A_MESSAGE', data => {
-        io.emit('SERVER_SEND_MESSAGE', data);
-    });
 });
 
 //emit, on. on
