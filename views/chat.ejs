@@ -10,11 +10,12 @@
                 socket.on('XAC_NHAN_DANG_KY', arrUsername => {
                     if(!arrUsername) return alert('DANG_KY_THAT_BAI');
                     arrUsername.forEach(username => $('#ulUsername').append(`<li>${username}</li>`));
-                });
+                    socket.on('NEW_USER_CONNECTED', username => {
+                        $('#ulUsername').append(`<li>${username}</li>`);
+                    });
+            });
 
-                socket.on('NEW_USER_CONNECTED', username => {
-                    $('#ulUsername').append(`<li>${username}</li>`);
-                });
+                
 
                 $('#btnSignUp').click(() => {
                     const username = $('#txtUsername').val();
