@@ -15,8 +15,18 @@ app.get('/chat', (req, res) => {
     res.render('chat');
 });
 
+const arrUsername = [];
+
 io.on('connection', socket => {
-    console.log('New connection!');
+    socket.on('NEW_USER_SIGN_UP', username => {
+        if (arrUsername.indexOf(username) === -1) {
+            arrUsername.push(username);
+            socket.emit('XAC_NHAN_DANG_KY', true);
+            io.emit('NEW_USER_CONNECTED', username);
+        } else {
+            socket.emit('XAC_NHAN_DANG_KY', false);
+        }
+    });
 });
 
 //emit, on. on
