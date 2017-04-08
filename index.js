@@ -10,3 +10,7 @@ app.use(express.static('public'));
 server.listen(3000, () => console.log('server started'));
 
 app.get('/', (req, res) => res.render('home'));
+
+io.on('connection', socket => {
+    console.log('New connection!');
+});
