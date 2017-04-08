@@ -15,7 +15,7 @@ io.on('connection', socket => {
     console.log('New connection!');
     // setInterval(() => socket.emit('SERVER_SEND_A_MESSAGE', 'XIN CHAO BAO'), 2000);
     socket.on('CLIENT_SEND_A_MESSAGE', data => {
-        console.log(data);
+        io.emit('SERVER_SEND_MESSAGE', data);
     });
 });
 
