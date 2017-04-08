@@ -7,11 +7,21 @@
         <script>
             const socket = io.connect();
             $(document).ready(() => {
+                socket.on('XAC_NHAN_DANG_KY', isOk => {
+                    if(isOk) return alert('DANG KY THANH CONG');
+                    alert('DANG KY THAT BAI`');
+                });
+
+                socket.on('NEW_USER_CONNECTED', username => {
+                    $('#ulUsername').append(`<li>${username}</li>`);
+                });
+
                 $('#btnSignUp').click(() => {
                     const username = $('#txtUsername').val();
                     $('#txtUsername').val('');
                     socket.emit('NEW_USER_SIGN_UP', username);
                 });
+
             });
         </script>
     </head>
@@ -19,5 +29,8 @@
         <h1>KhoaPham Training</h1>
         <input type="text" id="txtUsername" placeholder="Enter you message">
         <button id="btnSignUp">Sign Up</button>
+        <ul id="ulUsername">
+            <li>khoapham</li>
+        </ul>
     </body>
 </html>
