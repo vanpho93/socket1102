@@ -15,18 +15,31 @@ app.get('/chat', (req, res) => {
     res.render('chat');
 });
 
+class User {
+    constructor(username, id) {
+        this.username = username;
+        this.id = id;
+    }
+}
+
 const arrUsername = [];
+const arrUser = [];
 
 io.on('connection', socket => {
     console.log(socket.id);
     socket.on('NEW_USER_SIGN_UP', username => {
         if (arrUsername.indexOf(username) === -1) {
             arrUsername.push(username);
+            arrUser.push(new User(username, socket.id));
             socket.emit('XAC_NHAN_DANG_KY', arrUsername);
             socket.broadcast.emit('NEW_USER_CONNECTED', username);
         } else {
             socket.emit('XAC_NHAN_DANG_KY', false);
         }
+    });
+
+    socket.on('CLIENT_SEND_NEW_MESSAGE', msg => {
+
     });
 });
 
