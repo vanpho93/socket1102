@@ -29,6 +29,7 @@ io.on('connection', socket => {
     console.log(socket.id);
     socket.on('NEW_USER_SIGN_UP', username => {
         if (arrUsername.indexOf(username) === -1) {
+            socket.username = username;
             arrUsername.push(username);
             arrUser.push(new User(username, socket.id));
             socket.emit('XAC_NHAN_DANG_KY', arrUsername);
@@ -41,7 +42,11 @@ io.on('connection', socket => {
     socket.on('CLIENT_SEND_NEW_MESSAGE', msg => {
         const { dest, message } = msg;
         const { id } = arrUser.find(e => e.username === dest);
-        socket.broadcast.to(id).emit('GOT_NEW_MESSAGE', message);
+        socket.broadcast.to(id).emit('GOT_NEW_MESSAGE', `${socket.username}: ${message}`);
+    });
+
+    socket.on('disconnect', () => {
+
     });
 });
 
