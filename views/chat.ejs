@@ -9,14 +9,16 @@
             $(document).ready(() => {
                 socket.on('XAC_NHAN_DANG_KY', arrUsername => {
                     if(!arrUsername) return alert('DANG_KY_THAT_BAI');
-                    arrUsername.forEach(username => $('#ulUsername').append(`<li>${username}</li>`));
+                    arrUsername.forEach(username => $('#ulUsername').append(`<li id="${username}">${username}</li>`));
                     socket.on('NEW_USER_CONNECTED', username => {
-                        $('#ulUsername').append(`<li>${username}</li>`);
+                        $('#ulUsername').append(`<li id="${username}">${username}</li>`);
                     });
 
                     socket.on('GOT_NEW_MESSAGE', msg => console.log(msg));
 
-                    socket.on('USER_DISCONNECTED', username => console.log(username));
+                    socket.on('USER_DISCONNECTED', username => {
+                        $(`#${username}`).remove();
+                    });
                 });
 
 
@@ -34,8 +36,17 @@
                     socket.emit('CLIENT_SEND_NEW_MESSAGE',{ dest, message });
                 });
 
+                $('#ulUsername').on('click', 'li', function() {
+                    $('li').removeClass('red');
+                    $(this).addClass('red');
+                });
             });
         </script>
+        <style>
+            .red {
+                color: red;
+            }
+        </style>
     </head>
     <body>
         <h1>KhoaPham Training</h1>
@@ -49,6 +60,10 @@
         <button id="btnSend">SEND</button>
         <hr />
         <ul id="ulUsername">
+            <li>khoapham</li>
+            <li>khoapham</li>
+            <li>khoapham</li>
+            <li>khoapham</li>
             <li>khoapham</li>
         </ul>
     </body>
