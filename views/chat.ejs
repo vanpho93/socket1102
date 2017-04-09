@@ -5,6 +5,7 @@
         <script src="/socket.io/socket.io.js"></script>
         <script src="jquery-3.2.0.min.js"></script>
         <script>
+            let dest;
             const socket = io.connect();
             $(document).ready(() => {
                 socket.on('XAC_NHAN_DANG_KY', arrUsername => {
@@ -30,7 +31,6 @@
                 });
 
                 $('#btnSend').click(() => {
-                    const dest = $('#txtDest').val();
                     const message = $('#txtMessage').val();
                     $('#txtMessage').val('');
                     socket.emit('CLIENT_SEND_NEW_MESSAGE',{ dest, message });
@@ -39,6 +39,7 @@
                 $('#ulUsername').on('click', 'li', function() {
                     $('li').removeClass('red');
                     $(this).addClass('red');
+                    dest = $(this).text();
                 });
             });
         </script>
@@ -53,18 +54,11 @@
         <input type="text" id="txtUsername" placeholder="Enter you username">
         <button id="btnSignUp">Sign Up</button>
         <hr />
-        <input type="text" id="txtDest" placeholder="Enter you friend username">
-        <br /><br />
         <input type="text" id="txtMessage" placeholder="Enter you message">
         <br /><br />
         <button id="btnSend">SEND</button>
         <hr />
         <ul id="ulUsername">
-            <li>khoapham</li>
-            <li>khoapham</li>
-            <li>khoapham</li>
-            <li>khoapham</li>
-            <li>khoapham</li>
         </ul>
     </body>
 </html>
