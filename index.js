@@ -29,7 +29,7 @@ io.on('connection', socket => {
     console.log(socket.id);
     socket.on('NEW_USER_SIGN_UP', username => {
         if (arrUsername.indexOf(username) === -1) {
-            socket.username = username;
+            socket.username = username; // eslint-disable-line
             arrUsername.push(username);
             arrUser.push(new User(username, socket.id));
             socket.emit('XAC_NHAN_DANG_KY', arrUsername);
@@ -47,6 +47,9 @@ io.on('connection', socket => {
 
     socket.on('disconnect', () => {
         if (socket.username) io.emit('USER_DISCONNECTED', socket.username);
+        const index = arrUser.find(e => e.username === socket.username);
+        arrUser.splice(index, 1);
+        arrUsername.splice(index, 1);
     });
 });
 
