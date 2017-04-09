@@ -23,6 +23,13 @@
                     socket.emit('NEW_USER_SIGN_UP', username);
                 });
 
+                $('#btnSend').click(() => {
+                    const dest = $('#txtDest').val();
+                    const message = $('#txtMessage').val();
+                    $('#txtMessage').val('');
+                    console.log({ dest, message });
+                });
+
             });
         </script>
     </head>
