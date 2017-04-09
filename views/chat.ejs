@@ -13,9 +13,11 @@
                     socket.on('NEW_USER_CONNECTED', username => {
                         $('#ulUsername').append(`<li>${username}</li>`);
                     });
-            });
 
-                
+                    socket.on('GOT_NEW_MESSAGE', msg => console.log(msg));
+                });
+
+
 
                 $('#btnSignUp').click(() => {
                     const username = $('#txtUsername').val();
@@ -27,7 +29,7 @@
                     const dest = $('#txtDest').val();
                     const message = $('#txtMessage').val();
                     $('#txtMessage').val('');
-                    console.log({ dest, message });
+                    socket.emit('CLIENT_SEND_NEW_MESSAGE',{ dest, message });
                 });
 
             });

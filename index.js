@@ -39,7 +39,9 @@ io.on('connection', socket => {
     });
 
     socket.on('CLIENT_SEND_NEW_MESSAGE', msg => {
-
+        const { dest, message } = msg;
+        const { id } = arrUser.find(e => e.username === dest);
+        socket.broadcast.to(id).emit('GOT_NEW_MESSAGE', message);
     });
 });
 
